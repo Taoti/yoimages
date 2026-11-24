@@ -4,8 +4,8 @@
  * Plugin Name: YoImages
  * Plugin URI: http://sirulli.org/yoimages/
  * Description: Better image handling capabilities for Wordpress: image cropping tools, image SEO with automated metadata filling and images search from royalty free image directories.
- * Version: 0.1.8
- * Author: Sirulli
+ * Version: 0.2.0
+ * Author: Sirulli & Taoti Creative
  * Author URI: http://sirulli.org/
  * License: GPL2
  * Text Domain: yoimg
@@ -32,7 +32,7 @@ if (! defined ( 'ABSPATH' )) {
 }
 
 define ( 'YOIMG_PATH', dirname ( __FILE__ ) );
-require_once (YOIMG_PATH . '/vendor/sirulli/yoimages-commons/inc/init.php');
+require_once (YOIMG_PATH . '/src/yoimages-commons/inc/init.php');
 yoimg_register_module( 'yoimages-crop', YOIMG_PATH, true );
 yoimg_register_module( 'yoimages-seo', YOIMG_PATH, true );
 yoimg_register_module( 'yoimages-search', YOIMG_PATH, true );
