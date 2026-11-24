@@ -4,7 +4,7 @@ Donate link: sirulli.org/yoimages
 Tags: images, image, SEO, enhancement, crop, tool
 Requires at least: 3.9
 Tested up to: 4.8
-Stable tag: 0.1.8
+Stable tag: 0.2.0
 License: GPL2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -122,6 +122,11 @@ YoImages source code is hosted on [GitHub](https://github.com/sirulli/yoimages).
 5. free stock photos search
 
 == Changelog ==
+
+= 0.2.0 =
+* Taoti fork: PHP 8.4 compatible and security hardened
+* Child modules (commons, crop, seo, search) now live in this one package under src/
+* Installable with a single composer require taoti/yoimages
 
 = 0.1.8 =
 * Added search images to the "Add Media" popup
