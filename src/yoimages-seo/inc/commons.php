@@ -144,14 +144,32 @@ function yoimg_seo_expression_categories( $result, $attachment, $parent ) {
 }
 add_filter('yoimg_seo_expressions', 'yoimg_seo_expression_categories', 10, 3);
 
+/**
+ * True when an attachment with exactly this title already exists.
+ * Replaces get_page_by_title(), deprecated since WordPress 6.2.
+ */
+function yoimg_imgseo_attachment_title_exists( $title ) {
+	$query = new WP_Query( array(
+		'post_type'              => 'attachment',
+		'post_status'            => 'any',
+		'title'                  => $title,
+		'posts_per_page'         => 1,
+		'fields'                 => 'ids',
+		'no_found_rows'          => true,
+		'update_post_meta_cache' => false,
+		'update_post_term_cache' => false,
+	) );
+	return $query->have_posts();
+}
+
 function yoimg_imgseo_get_image_title( $attachment, $parent ) {
 	$base_title = yoimg_imgseo_explode_expression( YOIMG_IMGSEO_IMAGE_TITLE_EXPRESSION, $attachment, $parent );
 	$title = $base_title;
 	$count = 1;
-	$other = get_page_by_title( $title, 'OBJECT', 'attachment' );
+	$other = yoimg_imgseo_attachment_title_exists( $title );
 	while ( $other ) {
 		$title = $base_title . ' ' . $count;
-		$other = get_page_by_title( $title, 'OBJECT', 'attachment' );
+		$other = yoimg_imgseo_attachment_title_exists( $title );
 		$count++;
 	}
 	return $title;

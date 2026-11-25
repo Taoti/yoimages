@@ -59,7 +59,7 @@ add_filter ( 'yoimg_settings', 'yoimg_seo_extend_settings', 10, 1 );
 function yoimg_seo_settings_change_image_title_callback() {
 	$seo_options = get_option ( 'yoimg_seo_settings' );
 	printf ( '<input type="checkbox" id="imgseo_change_image_title" name="yoimg_seo_settings[imgseo_change_image_title]" value="TRUE" %s />
-				<p class="description">' . __ ( 'If checked title will be replaced with the expression here below', YOIMG_DOMAIN ) . '</p>', $seo_options ['imgseo_change_image_title'] ? 'checked="checked"' : (YOIMG_DEFAULT_IMGSEO_CHANGE_IMAGE_TITLE && ! isset ( $seo_options ['imgseo_change_image_title'] ) ? 'checked="checked"' : '') );
+				<p class="description">' . __ ( 'If checked title will be replaced with the expression here below', YOIMG_DOMAIN ) . '</p>', ! empty( $seo_options['imgseo_change_image_title'] ) ? 'checked=\"checked\"' : (YOIMG_DEFAULT_IMGSEO_CHANGE_IMAGE_TITLE && ! isset ( $seo_options ['imgseo_change_image_title'] ) ? 'checked="checked"' : '') );
 }
 function yoimg_seo_settings_image_title_expression_callback() {
 	$seo_options = get_option ( 'yoimg_seo_settings' );
@@ -69,7 +69,7 @@ function yoimg_seo_settings_image_title_expression_callback() {
 function yoimg_seo_settings_change_image_alt_callback() {
 	$seo_options = get_option ( 'yoimg_seo_settings' );
 	printf ( '<input type="checkbox" id="imgseo_change_image_alt" name="yoimg_seo_settings[imgseo_change_image_alt]" value="TRUE" %s />
-				<p class="description">' . __ ( 'If checked alt will be replaced with the expression here below', YOIMG_DOMAIN ) . '</p>', $seo_options ['imgseo_change_image_alt'] ? 'checked="checked"' : (YOIMG_DEFAULT_IMGSEO_CHANGE_IMAGE_ALT && ! isset ( $seo_options ['imgseo_change_image_alt'] ) ? 'checked="checked"' : '') );
+				<p class="description">' . __ ( 'If checked alt will be replaced with the expression here below', YOIMG_DOMAIN ) . '</p>', ! empty( $seo_options['imgseo_change_image_alt'] ) ? 'checked=\"checked\"' : (YOIMG_DEFAULT_IMGSEO_CHANGE_IMAGE_ALT && ! isset ( $seo_options ['imgseo_change_image_alt'] ) ? 'checked="checked"' : '') );
 }
 function yoimg_seo_settings_image_alt_expression_callback() {
 	$seo_options = get_option ( 'yoimg_seo_settings' );
@@ -79,7 +79,7 @@ function yoimg_seo_settings_image_alt_expression_callback() {
 function yoimg_seo_settings_image_filename_callback() {
 	$seo_options = get_option ( 'yoimg_seo_settings' );
 	printf ( '<input type="checkbox" id="imgseo_change_image_filename" name="yoimg_seo_settings[imgseo_change_image_filename]" value="TRUE" %s />
-				<p class="description">' . __ ( 'If checked the filename will be replaced with the expression here below', YOIMG_DOMAIN ) . '</p>', $seo_options ['imgseo_change_image_filename'] ? 'checked="checked"' : (YOIMG_DEFAULT_IMGSEO_CHANGE_IMAGE_FILENAME && ! isset ( $seo_options ['imgseo_change_image_filename'] ) ? 'checked="checked"' : '') );
+				<p class="description">' . __ ( 'If checked the filename will be replaced with the expression here below', YOIMG_DOMAIN ) . '</p>', ! empty( $seo_options['imgseo_change_image_filename'] ) ? 'checked=\"checked\"' : (YOIMG_DEFAULT_IMGSEO_CHANGE_IMAGE_FILENAME && ! isset ( $seo_options ['imgseo_change_image_filename'] ) ? 'checked="checked"' : '') );
 }
 function yoimg_seo_settings_image_filename_expression_callback() {
 	$seo_options = get_option ( 'yoimg_seo_settings' );

@@ -9,10 +9,10 @@ function yoimg_print_media_templates() {
 	<script>
 	jQuery(document).ready(function() {
 		yoimgExtendMediaLightboxTemplate(
-			'<?php echo yoimg_get_edit_image_anchor( '{{ data.id }}', 'thumbnail', 'display:block;text-decoration:none;' ); ?>',
-			'<?php echo yoimg_get_edit_image_anchor( '{{ data.id }}', 'thumbnail', 'text-decoration:none;' ); ?>',
-			'<?php echo yoimg_get_edit_image_anchor( '{{ data.id }}', 'thumbnail', '', 'button' ); ?>',
-			'<?php echo yoimg_get_edit_image_anchor( '{{ data.attachment.id }}', 'thumbnail', '', 'button' ); ?>'
+			<?php echo wp_json_encode( yoimg_get_edit_image_anchor( '{{ data.id }}', 'thumbnail', 'display:block;text-decoration:none;' ) ); ?>,
+			<?php echo wp_json_encode( yoimg_get_edit_image_anchor( '{{ data.id }}', 'thumbnail', 'text-decoration:none;' ) ); ?>,
+			<?php echo wp_json_encode( yoimg_get_edit_image_anchor( '{{ data.id }}', 'thumbnail', '', 'button' ) ); ?>,
+			<?php echo wp_json_encode( yoimg_get_edit_image_anchor( '{{ data.attachment.id }}', 'thumbnail', '', 'button' ) ); ?>
 		);
 	});
 	</script>

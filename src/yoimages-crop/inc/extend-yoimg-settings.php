@@ -53,17 +53,17 @@ add_filter ( 'yoimg_settings', 'yoimg_crop_extend_settings', 10, 1 );
 function yoimg_crop_settings_cropping_is_active_callback() {
 	$crop_options = get_option ( 'yoimg_crop_settings' );
 	printf ( '<input type="checkbox" id="cropping_is_active" name="yoimg_crop_settings[cropping_is_active]" value="TRUE" %s />
-				<p class="description">' . __ ( 'If checked cropping is active', YOIMG_DOMAIN ) . '</p>', $crop_options ['cropping_is_active'] ? 'checked="checked"' : (YOIMG_DEFAULT_CROP_ENABLED && ! isset ( $crop_options ['cropping_is_active'] ) ? 'checked="checked"' : '') );
+				<p class="description">' . __ ( 'If checked cropping is active', YOIMG_DOMAIN ) . '</p>', ! empty( $crop_options['cropping_is_active'] ) ? 'checked=\"checked\"' : (YOIMG_DEFAULT_CROP_ENABLED && ! isset ( $crop_options ['cropping_is_active'] ) ? 'checked="checked"' : '') );
 }
 function yoimg_crop_settings_crop_qualities_callback() {
 	$crop_options = get_option ( 'yoimg_crop_settings' );
 	printf ( '<input type="text" id="crop_qualities" name="yoimg_crop_settings[crop_qualities]" value="%s" class="cropping_is_active-dep" />
-				<p class="description">' . __ ( 'Comma separated list of crop quality values (100 best to 50 medium)', YOIMG_DOMAIN ) . '</p>', ! empty ( $crop_options ['crop_qualities'] ) ? esc_attr ( implode ( ',', $crop_options ['crop_qualities'] ) ) : implode ( ',', unserialize ( YOIMG_DEFAULT_CROP_QUALITIES ) ) );
+				<p class="description">' . __ ( 'Comma separated list of crop quality values (100 best to 50 medium)', YOIMG_DOMAIN ) . '</p>', ! empty ( $crop_options ['crop_qualities'] ) ? esc_attr ( implode ( ',', $crop_options ['crop_qualities'] ) ) : implode ( ',', YOIMG_DEFAULT_CROP_QUALITIES ) );
 }
 function yoimg_crop_settings_retina_cropping_is_active_callback() {
 	$crop_options = get_option ( 'yoimg_crop_settings' );
 	printf ( '<input type="checkbox" id="retina_cropping_is_active" class="cropping_is_active-dep" name="yoimg_crop_settings[retina_cropping_is_active]" value="TRUE" %s />
-				<p class="description">' . __ ( 'Flag to enable (enable this option if you are using a retina plugin that uses @2x as file naming convention when creating retina images from source - e.g. <a href="https://wordpress.org/plugins/wp-retina-2x/" target="_blank">WP Retina 2x</a>)', YOIMG_DOMAIN ) . '</p>', $crop_options ['retina_cropping_is_active'] ? 'checked="checked"' : (YOIMG_DEFAULT_CROP_RETINA_ENABLED && ! isset ( $crop_options ['retina_cropping_is_active'] ) ? 'checked="checked"' : '') );
+				<p class="description">' . __ ( 'Flag to enable (enable this option if you are using a retina plugin that uses @2x as file naming convention when creating retina images from source - e.g. <a href="https://wordpress.org/plugins/wp-retina-2x/" target="_blank">WP Retina 2x</a>)', YOIMG_DOMAIN ) . '</p>', ! empty( $crop_options['retina_cropping_is_active'] ) ? 'checked=\"checked\"' : (YOIMG_DEFAULT_CROP_RETINA_ENABLED && ! isset ( $crop_options ['retina_cropping_is_active'] ) ? 'checked="checked"' : '') );
 }
 function yoimg_crop_settings_cropping_sizes_callback() {
 	$crop_sizes_options = yoimg_get_image_sizes ();
@@ -79,11 +79,11 @@ function yoimg_crop_settings_cropping_sizes_callback() {
 				</thead>' );
 	foreach ( $crop_sizes_options as $crop_size_id => $crop_size_option ) {
 		if ( isset( $crop_size_option['active'] ) && $crop_size_option['crop'] == 1 ) {
-			printf ( '<tr><td>%s</td>', $crop_size_id );
-			printf ( '<td>%s</td>', $crop_size_option['width'] );
-			printf ( '<td>%s</td>', $crop_size_option['height'] );
-			printf ( '<td><input class="cropping_is_active-dep" type="text" name="yoimg_crop_settings[crop_sizes][%s][name]" value="%s" style="width: 100%%;" /></td>', $crop_size_id, $crop_size_option['name'] );
-			printf ( '<td><input class="cropping_is_active-dep" type="checkbox" name="yoimg_crop_settings[crop_sizes][%s][active]" value="TRUE" %s /></td></tr>', $crop_size_id, isset( $crop_size_option['active'] ) && $crop_size_option['active'] ? 'checked="checked"' : '' );
+			printf ( '<tr><td>%s</td>', esc_html( $crop_size_id ) );
+			printf ( '<td>%s</td>', (int) $crop_size_option['width'] );
+			printf ( '<td>%s</td>', (int) $crop_size_option['height'] );
+			printf ( '<td><input class="cropping_is_active-dep" type="text" name="yoimg_crop_settings[crop_sizes][%s][name]" value="%s" style="width: 100%%;" /></td>', esc_attr( $crop_size_id ), esc_attr( $crop_size_option['name'] ) );
+			printf ( '<td><input class="cropping_is_active-dep" type="checkbox" name="yoimg_crop_settings[crop_sizes][%s][active]" value="TRUE" %s /></td></tr>', esc_attr( $crop_size_id ), isset( $crop_size_option['active'] ) && $crop_size_option['active'] ? 'checked="checked"' : '' );
 		}
 	}
 	print ( '</table>' );
@@ -126,15 +126,15 @@ function yoimg_crop_settings_sanitize($input) {
 			}
 		}
 		if (empty ( $crop_qualities_arr )) {
-			add_settings_error ( 'yoimg_crop_options_group', 'crop_qualities', __ ( 'Crop qualities value is not valid, using default:', YOIMG_DOMAIN ) . ' ' . implode ( ',', unserialize ( YOIMG_DEFAULT_CROP_QUALITIES ) ), 'error' );
-			$new_input ['crop_qualities'] = unserialize ( YOIMG_DEFAULT_CROP_QUALITIES );
+			add_settings_error ( 'yoimg_crop_options_group', 'crop_qualities', __ ( 'Crop qualities value is not valid, using default:', YOIMG_DOMAIN ) . ' ' . implode ( ',', YOIMG_DEFAULT_CROP_QUALITIES ), 'error' );
+			$new_input ['crop_qualities'] = YOIMG_DEFAULT_CROP_QUALITIES;
 		} else {
 			$crop_qualities_arr = array_unique ( $crop_qualities_arr );
 			rsort ( $crop_qualities_arr );
 			$new_input ['crop_qualities'] = $crop_qualities_arr;
 		}
 	} else {
-		$new_input ['crop_qualities'] = unserialize ( YOIMG_DEFAULT_CROP_QUALITIES );
+		$new_input ['crop_qualities'] = YOIMG_DEFAULT_CROP_QUALITIES;
 	}
 	if (isset ( $input ['retina_cropping_is_active'] ) && ($input ['retina_cropping_is_active'] === 'TRUE' || $input ['retina_cropping_is_active'] === TRUE)) {
 		$new_input ['retina_cropping_is_active'] = TRUE;

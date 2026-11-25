@@ -33,6 +33,9 @@ if (! function_exists ( 'yoimg_search_load_styles_and_scripts' )) {
 				'uploadImageButton' =>  __ ( 'Upload', YOIMG_DOMAIN )
 		);
 		wp_localize_script ( 'yoimg-search-js', 'l10n', $translation_array );
+		wp_localize_script ( 'yoimg-search-js', 'yoimgSearchAjax', array (
+				'nonce' => yoimg_ajax_nonce()
+		) );
 		wp_enqueue_script ( 'yoimg-search-js' );
 	}
 }

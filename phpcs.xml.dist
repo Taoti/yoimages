@@ -12,10 +12,6 @@
 	<exclude-pattern>*/web/wp-*.php</exclude-pattern>
 	<exclude-pattern>*/scripts/*</exclude-pattern>
 
-	<!-- Exclude Taoti Base Theme as it is maintained elsewhere. -->
-	<!-- Note: Uncomment this once 'jp-base' is converted into 'taoti-base-theme' and added as a Composer package. -->
-  <exclude-pattern>*/wp-content/themes/taoti-base-theme/*</exclude-pattern>
-
   <!-- Show colors in console -->
   <arg value="-colors"/>
 
@@ -24,7 +20,7 @@
 
   <!-- Rules: Check PHP version compatibility -->
 	<!-- https://github.com/PHPCompatibility/PHPCompatibility#sniffing-your-code-for-compatibility-with-specific-php-versions -->
-	<config name="testVersion" value="8.4-"/>
+	<config name="testVersion" value="8.3-"/>
 	<rule ref="PHPCompatibility"/>
   <rule ref="PHPCompatibilityWP"/>
 
