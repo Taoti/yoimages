@@ -50,7 +50,7 @@ You are free to define metadata values by using fixed texts and the following va
 * site name
 
 
-*Note:* you can add your own [custom hooks](https://github.com/sirulli/yoimages#adding-your-own-custom-hooks) and your own [custom variables](https://github.com/sirulli/yoimages#adding-your-own-custom-variables).
+*Note:* you can add your own [custom hooks](https://github.com/taoti/yoimages#adding-your-own-custom-hooks) and your own [custom variables](https://github.com/sirulli/yoimages#adding-your-own-custom-variables).
 
 
 
@@ -66,7 +66,7 @@ The photos you select are uploaded into your Wordpress site and optimized with Y
 Photos from splashbase.co and unsplash.com are hi-res and free to use, but we recommend checking copyright details for each photo you choose.
 
 
-*Note:* you can also add other [search providers](https://github.com/sirulli/yoimages#adding-new-free-stock-photos-search-providers).
+*Note:* you can also add other [search providers](https://github.com/taoti/yoimages#adding-new-free-stock-photos-search-providers).
 
 
 
@@ -87,7 +87,7 @@ Future features to implement:
 * ...
 
 
-Feel free to report bugs or request new features [here](https://github.com/sirulli/yoimages/issues).
+Feel free to report bugs or request new features [here](https://github.com/taoti/yoimages/issues).
 
 = How to contribute =
 
@@ -106,7 +106,9 @@ Thanks to [Ben Bowler](https://github.com/benbowler) for his code contributions.
 
 = Source code =
 
-YoImages source code is hosted on [GitHub](https://github.com/sirulli/yoimages).
+YoImages source code is hosted on [Taoti Creative's GitHub](https://github.com/taoti/yoimages).
+
+The original YoImages source code is hosted on [sirulli's GitHub](https://github.com/sirulli/yoimages).
 
 == Installation ==
 
@@ -125,10 +127,16 @@ YoImages source code is hosted on [GitHub](https://github.com/sirulli/yoimages).
 == Changelog ==
 
 = 0.3.0 =
-* Requires PHP 8.3 or newer (0.2.0 is the last release for PHP 8.1 and 8.2). Checked against PHP 8.5.
-* Security: all admin AJAX requests now verify a nonce, and inputs are validated and escaped
+* Requires PHP 8.3 or newer and WordPress 6.7 or newer (0.2.0 is the last release for PHP 8.1 and 8.2). Statically checked for PHP 8.3 through 8.5.
+* Security: all admin AJAX requests now verify a nonce
+* Security: fixed reflected and stored cross-site scripting in the crop screen
+* Security: crop and replacement-image inputs are validated, and the edit-crop link now checks permissions
+* Security: admin output is escaped across the settings pages, crop screen, and stock photo search
 * Security: stock photo import only accepts images from approved hosts
 * Fix: a failed crop no longer leaves broken thumbnail metadata behind
+* Fix: PHP warnings from undefined variables and unset settings on PHP 8.x
+* Fix: replaced WordPress functions deprecated since 3.4 and 6.2
+* Fix: the SEO module skips autosaves and revisions, and handles files with no extension
 * Added Update URI so WordPress.org can't offer the abandoned upstream copy as an update
 
 = 0.2.0 =
