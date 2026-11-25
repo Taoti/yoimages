@@ -5,6 +5,7 @@ if ( ! defined ( 'ABSPATH' ) ) {
 }
 
 function yoimg_get_custom_sizes_table_rows() {
+	check_ajax_referer( 'yoimg_ajax', '_wpnonce' );
 	if ( current_user_can( 'manage_options' ) ) {
 		include (YOIMG_CROP_PATH . '/html/custom-sizes-table-rows.php');
 	}

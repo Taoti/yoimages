@@ -5,6 +5,9 @@ if (! defined ( 'ABSPATH' )) {
 }
 
 function yoimg_imgseo_save_post( $post_id ) {
+	if ( wp_is_post_autosave( $post_id ) || wp_is_post_revision( $post_id ) ) {
+		return;
+	}
 	$parent = get_post( $post_id );
 	$ids = array();
 	$ids = apply_filters( 'yoimg_seo_images_to_update', $ids, $post_id );

@@ -2,9 +2,10 @@
 Contributors: ferrbea, fagia
 Donate link: sirulli.org/yoimages
 Tags: images, image, SEO, enhancement, crop, tool
-Requires at least: 3.9
+Requires at least: 6.7
+Requires PHP: 8.3
 Tested up to: 4.8
-Stable tag: 0.2.0
+Stable tag: 0.3.0
 License: GPL2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -94,7 +95,7 @@ Feel free to report bugs or request new features [here](https://github.com/sirul
 
 = Credits =
 
-Thanks to Fengyuan Chen for his [jQuery Image Cropper](http://fengyuanchen.github.io/cropper/) plugin.
+Thanks to Fengyuan Chen for his [jQuery Image Cropper](https://github.com/fengyuanchen/cropper) plugin.
 Thanks to [wp-fred](https://profiles.wordpress.org/wp-fred-1/) for the Dutch translations of the plugin and for suggesting and designing the "user-friendly names" feature for crop formats.
 Thanks to [Maxime Lafontaine](http://www.maximelafontaine.net/) for the French translations of the plugin.
 Thanks to [Thomas Meyer](https://github.com/tmconnect/) for code contributions and fixes to the German translations.
@@ -122,6 +123,13 @@ YoImages source code is hosted on [GitHub](https://github.com/sirulli/yoimages).
 5. free stock photos search
 
 == Changelog ==
+
+= 0.3.0 =
+* Requires PHP 8.3 or newer (0.2.0 is the last release for PHP 8.1 and 8.2). Checked against PHP 8.5.
+* Security: all admin AJAX requests now verify a nonce, and inputs are validated and escaped
+* Security: stock photo import only accepts images from approved hosts
+* Fix: a failed crop no longer leaves broken thumbnail metadata behind
+* Added Update URI so WordPress.org can't offer the abandoned upstream copy as an update
 
 = 0.2.0 =
 * Taoti fork: PHP 8.4 compatible and security hardened

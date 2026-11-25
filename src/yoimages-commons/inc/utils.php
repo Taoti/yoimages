@@ -13,6 +13,14 @@ if (! function_exists( 'yoimg_log' ) ) {
 		}
 	}
 }
+if (! function_exists( 'yoimg_ajax_nonce' ) ) {
+	/**
+	 * Nonce shared by all YoImages admin AJAX requests.
+	 */
+	function yoimg_ajax_nonce() {
+		return wp_create_nonce( 'yoimg_ajax' );
+	}
+}
 if (! function_exists( 'yoimg_register_module' ) ) {
 	function yoimg_register_module($module_id, $module_path, $has_settings = false) {
 		global $yoimg_modules;

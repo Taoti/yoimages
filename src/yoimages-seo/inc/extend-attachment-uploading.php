@@ -34,17 +34,21 @@ function yoimg_attachment_added_to_post_or_page( $attachment_id ) {
 							)
 						);
 						$attachment->post_name = wp_unique_post_slug( $post_parent_slug, $attachment_id, $attachment->post_status, $attachment->post_type, $post_parent_id );
-						$attachment_new_path = $attachment_path_info['dirname'] . '/' . $attachment->post_name . '.' . $attachment_path_info['extension'];
+						$attachment_extension = isset( $attachment_path_info['extension'] ) ? '.' . $attachment_path_info['extension'] : '';
+						$attachment_new_path = $attachment_path_info['dirname'] . '/' . $attachment->post_name . $attachment_extension;
 						$count = 0;
 						$base_post_name = $attachment->post_name;
 						while ( file_exists( $attachment_new_path ) ) {
 							$count = $count + 1;
-							$attachment_new_path = $attachment_path_info['dirname'] . '/' . $base_post_name . $count . '.' . $attachment_path_info['extension'];
+							$attachment_new_path = $attachment_path_info['dirname'] . '/' . $base_post_name . $count . $attachment_extension;
 							$attachment->post_name = $base_post_name . $count;
 						}
-						rename( $attachment_path, $attachment_new_path );
-						update_attached_file( $attachment_id, $attachment_new_path );
-						update_post_meta( $attachment_id, 'yoimg_tmp_attachment_metadata', wp_generate_attachment_metadata( $attachment_id, $attachment_new_path ) );
+						if ( rename( $attachment_path, $attachment_new_path ) ) {
+							update_attached_file( $attachment_id, $attachment_new_path );
+							update_post_meta( $attachment_id, 'yoimg_tmp_attachment_metadata', wp_generate_attachment_metadata( $attachment_id, $attachment_new_path ) );
+						} else {
+							yoimg_log( 'yoimages-seo could not rename ' . $attachment_path );
+						}
 					}
 
 					wp_update_post( $attachment );

@@ -8,11 +8,11 @@ if (is_admin () || php_sapi_name () == 'cli') {
 	define ( 'YOIMG_CROP_PATH', dirname ( __FILE__ ) );
 
 	define ( 'YOIMG_DEFAULT_CROP_ENABLED', TRUE );
-	define ( 'YOIMG_DEFAULT_CROP_QUALITIES', serialize ( array (
+	define ( 'YOIMG_DEFAULT_CROP_QUALITIES', array (
 			100,
 			80,
 			60
-	) ) );
+	) );
 	$yoimg_crop_settings = get_option ( 'yoimg_crop_settings' );
 
 	define ( 'YOIMG_CROP_ENABLED', $yoimg_crop_settings && isset ( $yoimg_crop_settings ['cropping_is_active'] ) ? $yoimg_crop_settings ['cropping_is_active'] : YOIMG_DEFAULT_CROP_ENABLED );
@@ -70,6 +70,9 @@ function yoimg_crop_load_styles_and_scripts($hook) {
 		wp_enqueue_script ( 'yoimg-cropping-js', YOIMG_CROP_URL . '/js/yoimg-cropping.js', array (
 				'yoimg-cropper-js'
 		), false, true );
+		wp_localize_script ( 'yoimg-cropping-js', 'yoimgAjax', array (
+				'nonce' => yoimg_ajax_nonce()
+		) );
 	}
 }
 add_action ( 'admin_enqueue_scripts', 'yoimg_crop_load_styles_and_scripts' );

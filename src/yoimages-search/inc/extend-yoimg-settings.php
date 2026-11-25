@@ -40,7 +40,7 @@ function yoimg_search_settings_section_info() {
 		print __('Images sources:', YOIMG_DOMAIN );
 		print '<ul>';
 		foreach ( $yoimg_search_providers as $yoimg_search_provider ) {
-			print '<li><a href="' . $yoimg_search_provider['url'] . '" target="_blank">' . $yoimg_search_provider['name'] . '</a>,';
+			print '<li><a href="' . esc_url( $yoimg_search_provider['url'] ) . '" target="_blank" rel="noopener noreferrer">' . esc_html( $yoimg_search_provider['name'] ) . '</a>,';
 			print __('see T&C for more info.', YOIMG_DOMAIN );
 			print '</li>';
 		}
@@ -53,7 +53,7 @@ function yoimg_search_settings_search_is_active_callback() {
 	printf(
 	'<input type="checkbox" id="search_is_active" name="yoimg_search_settings[search_is_active]" value="TRUE" %s />
 		<p class="description">' . __( 'If checked free stock images search is active', YOIMG_DOMAIN ) . '</p>',
-				$search_options['search_is_active'] ? 'checked="checked"' : ( YOIMG_DEFAULT_SEARCH_ENABLED && ! isset( $search_options['search_is_active'] ) ? 'checked="checked"' : '' )
+				! empty( $search_options['search_is_active'] ) ? 'checked=\"checked\"' : ( YOIMG_DEFAULT_SEARCH_ENABLED && ! isset( $search_options['search_is_active'] ) ? 'checked="checked"' : '' )
 	);
 }
 

@@ -21,6 +21,7 @@ function yoimgAddEditImageAnchors() {
 					if (!currEl.parent().find('.yoimg').length && currEl.parent().find('.pinkynail').attr('src').match(/upload/g)) {
 						var data = {
 							'action' : 'yoimg_get_edit_image_anchor',
+							'_wpnonce' : yoimgAjax.nonce,
 							'post' : match[1]
 						};
 						jQuery.post(ajaxurl, data, function(response) {
@@ -119,6 +120,7 @@ function yoimgInitCropImage(doImmediateCrop) {
 					attachment = yoimgMediaUploader.state().get('selection').first().toJSON();
 					var data = {
 						'action' : 'yoimg_replace_image_for_size',
+						'_wpnonce' : yoimgAjax.nonce,
 						'image' : yoimg_image_id,
 						'size' : yoimg_image_size,
 						'replacement' : attachment.id
@@ -136,6 +138,7 @@ function yoimgInitCropImage(doImmediateCrop) {
 		jQuery('#yoimg-restore-img-btn').click(function() {
 			var data = {
 				'action' : 'yoimg_restore_original_image_for_size',
+				'_wpnonce' : yoimgAjax.nonce,
 				'image' : yoimg_image_id,
 				'size' : yoimg_image_size
 			};
@@ -232,6 +235,7 @@ function yoimgCropImage() {
 	jQuery('#yoimg-cropper-wrapper .spinner').addClass('is-active');
 	var data = jQuery('#yoimg-cropper').cropper('getData');
 	data['action'] = 'yoimg_crop_image';
+	data['_wpnonce'] = yoimgAjax.nonce;
 	data['post'] = yoimg_image_id;
 	data['size'] = yoimg_image_size;
 	data['quality'] = jQuery('#yoimg-cropper-quality').val();
@@ -290,6 +294,7 @@ jQuery(document).ready(function($) {
 		if (editImageBtn.length) {
 			var data = {
 				'action' : 'yoimg_get_edit_image_anchor',
+				'_wpnonce' : yoimgAjax.nonce,
 				'post' : currPostId,
 				'classes' : 'button'
 			};
@@ -321,7 +326,8 @@ jQuery(document).ready(function($) {
 
 	if ($('input#large_size_h').length) {
 		var data = {
-			'action' : 'yoimg_get_custom_sizes_table_rows'
+			'action' : 'yoimg_get_custom_sizes_table_rows',
+			'_wpnonce' : yoimgAjax.nonce
 		};
 		$.post(ajaxurl, data, function(response) {
 			$('input#large_size_h').parents('table.form-table').after(response);

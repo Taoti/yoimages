@@ -370,7 +370,7 @@ jQuery(document).ready(function() {
 					for (var i = 0; i < res.length; i++) {
 						var resItem = res[i];
 						var id = resItem.imageId;
-						if ( '' !== id && -1 !== id ) {
+						if ( id && -1 !== id ) {
 							var attachment = wp.media.model.Attachment.get( id );
 							attachment.fetch();
 							attachments.push(attachment);
@@ -402,6 +402,7 @@ jQuery(document).ready(function() {
 				if (selectedImages && selectedImages.length > 0) {
 					var data = {
 						'action' : 'yoimg_search_upload_images',
+						'_wpnonce' : yoimgSearchAjax.nonce,
 						'postId' : wp.media.view.settings.post.id,
 						'imagesUrls' : selectedImages
 					};

@@ -9,6 +9,13 @@ Image cropping, image SEO hooks, and stock photo search for WordPress, in one pl
 - Taoti upgraded the plugin and its four child modules for PHP 8.4.x and WordPress 6.7+, and hardened them for security.
 - The child modules used to be separate, also-abandoned repositories. They now live in this one repo under `src/`. One repo, one package.
 
+## Requirements
+
+- PHP 8.3 or newer (checked against 8.5)
+- WordPress 6.7 or newer
+
+Need PHP 8.1 or 8.2? Stay on 0.2.0, the last release that supports them.
+
 ## Install
 
 Add Taoti's Packistry to the site's `composer.json` if it isn't there already:
@@ -57,6 +64,35 @@ composer install
 composer lint        # php -l plus PHP 8.1+ compatibility
 composer lint:wpcs   # full WordPress standard (legacy code, expect findings)
 ```
+
+## Future features
+
+- **Upgrade Cropper.** The crop screen still runs on Cropper v0.5.2, a 2014 jQuery plugin. The current release is [Cropper.js 2.x](https://github.com/fengyuanchen/cropperjs). Version 1.7 plus its jQuery wrapper is the smaller step. Version 2 is a rewrite, so the cropping JavaScript and markup in `src/yoimages-crop/inc/` will need reworking. Not a drop-in swap.
+- Refresh the stock photo search providers. Splashbase is long gone, and the Unsplash client is built on an API that has since changed.
+- A simple built-in image editor (effects, editing, color optimization).
+- Image gallery templates.
+
+Found a bug or want something added? [Open an issue](https://github.com/Taoti/yoimages/issues).
+
+## How to contribute
+
+Pull requests are welcome on [Taoti/yoimages](https://github.com/Taoti/yoimages). Run `composer lint` before you push, and keep changes small and focused. For the project's history, the original contribution notes live at [sirulli.org/yoimages](http://sirulli.org/yoimages/#contribute).
+
+## Credits
+
+YoImages is the work of **Sirulli** ([sirulli.org](http://sirulli.org/), [sirulli/yoimages](https://github.com/sirulli/yoimages)). Taoti's fork exists because of what they built. Everything here started with them.
+
+Cropping runs on **Cropper**, the jQuery image cropper by **Fengyuan Chen** ([github.com/fengyuanchen/cropper](https://github.com/fengyuanchen/cropper), MIT licensed). We bundle v0.5.2 in `src/yoimages-crop/inc/js/cropper/`. Thank you, Fengyuan.
+
+Thanks also to the upstream contributors:
+
+- [wp-fred](https://profiles.wordpress.org/wp-fred-1/) for the Dutch translations, and for suggesting and designing the "user-friendly names" feature for crop formats.
+- [Maxime Lafontaine](http://www.maximelafontaine.net/) for the French translations.
+- [Thomas Meyer](https://github.com/tmconnect/) for code contributions and fixes to the German translations.
+- [Robert Vermeulen](https://github.com/robert388) for better metadata support, WP-CLI commands, and Regenerate Thumbnails compatibility.
+- [Elliot Coad](https://github.com/ecoad) for the action fired after cropping.
+- [odie2](https://github.com/odie2/) for code contributions and the Polish translations.
+- [Ben Bowler](https://github.com/benbowler) for his code contributions.
 
 ## License
 

@@ -13,7 +13,7 @@ if ( count($sizes ) > 3 ) {
 	$current_theme_name = $current_theme->get( 'Name' );
 ?>
 
-<p><?php _e( 'The sizes listed below are the crop and resize formats defined by ', YOIMG_DOMAIN ); ?> <?php echo $current_theme_name; ?></p>
+<p><?php _e( 'The sizes listed below are the crop and resize formats defined by ', YOIMG_DOMAIN ); ?> <?php echo esc_html( $current_theme_name ); ?></p>
 
 <table class="form-table">
 <tbody>
@@ -28,14 +28,14 @@ foreach ( $sizes as $size_key => $size_value ) {
 ?>
 
 <tr class="yoimg-size-row">
-	<th scope="row"><?php echo $size_value['name']; ?></th>
+	<th scope="row"><?php echo esc_html( $size_value['name'] ); ?></th>
 	<td>
 		<?php if ( $size_value['crop'] == 1 ) { ?>
-			<label class="yoimg-first"><?php _e( 'Width', YOIMG_DOMAIN ); ?>: <?php echo $size_value['width']; ?></label>
-			<label><?php _e( 'Height', YOIMG_DOMAIN ); ?>: <?php echo $size_value['height']; ?></label>
+			<label class="yoimg-first"><?php _e( 'Width', YOIMG_DOMAIN ); ?>: <?php echo (int) $size_value['width']; ?></label>
+			<label><?php _e( 'Height', YOIMG_DOMAIN ); ?>: <?php echo (int) $size_value['height']; ?></label>
 		<?php } else { ?>
-			<label class="yoimg-first"><?php _e( 'Max Width', YOIMG_DOMAIN ); ?>: <?php echo $size_value['width']; ?></label>
-			<label><?php _e( 'Max Height', YOIMG_DOMAIN ); ?>: <?php echo $size_value['height']; ?></label>
+			<label class="yoimg-first"><?php _e( 'Max Width', YOIMG_DOMAIN ); ?>: <?php echo (int) $size_value['width']; ?></label>
+			<label><?php _e( 'Max Height', YOIMG_DOMAIN ); ?>: <?php echo (int) $size_value['height']; ?></label>
 		<?php } ?>
 	</td>
 </tr>
@@ -89,7 +89,7 @@ jQuery(document).ready(function(){
 <?php
 } else {
 ?>
-<p><?php echo get_current_theme(); ?> <?php _e( 'doesn\'t define any additional image size using the standard Wordpress functions (<a href="http://codex.wordpress.org/Function_Reference/add_image_size" target="_blank">add_image_size</a> and <a href="http://codex.wordpress.org/Function_Reference/set_post_thumbnail_size" target="_blank">set_post_thumbnail_size</a>)', YOIMG_DOMAIN ); ?></p>
+<p><?php echo esc_html( wp_get_theme()->get( 'Name' ) ); ?> <?php _e( 'doesn\'t define any additional image size using the standard Wordpress functions (<a href="http://codex.wordpress.org/Function_Reference/add_image_size" target="_blank">add_image_size</a> and <a href="http://codex.wordpress.org/Function_Reference/set_post_thumbnail_size" target="_blank">set_post_thumbnail_size</a>)', YOIMG_DOMAIN ); ?></p>
 <br />
 <?php
 }
