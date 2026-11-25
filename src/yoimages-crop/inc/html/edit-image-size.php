@@ -77,13 +77,13 @@ if ( $has_replacement ) {
 	<div class="media-modal wp-core-ui">
 		<button type="button" class="media-modal-close" onclick="javascript:yoimgCancelCropImage();">
 			<span class="media-modal-icon">
-				<span class="screen-reader-text"><?php _e( 'Close crop panel', YOIMG_DOMAIN ); ?></span>
+				<span class="screen-reader-text"><?php esc_html_e( 'Close crop panel', YOIMG_DOMAIN ); ?></span>
 			</span>
 		</button>
 		<div class="media-modal-content">
 <?php } ?>
 	    	<div class="media-frame wp-core-ui">	
-				<div class="media-frame-title"><h1><?php _e( 'Edit crop formats from full image', YOIMG_DOMAIN ); ?> (<?php echo (int) $full_image_attributes[1]; ?>x<?php echo (int) $full_image_attributes[2]; ?>)</h1></div>
+				<div class="media-frame-title"><h1><?php esc_html_e( 'Edit crop formats from full image', YOIMG_DOMAIN ); ?> (<?php echo (int) $full_image_attributes[1]; ?>x<?php echo (int) $full_image_attributes[2]; ?>)</h1></div>
 				<div class="media-frame-router">
 					<button type="button" class="button-link arrows arrow-l">
 						<span class="dashicons dashicons-arrow-left-alt2"></span>
@@ -117,9 +117,9 @@ if ( $has_replacement ) {
 							<div id="yoimg-cropper-container" style="max-width: <?php echo (int) $full_image_attributes[1]; ?>px;max-height: <?php echo (int) $full_image_attributes[2]; ?>px;">
 								<img id="yoimg-cropper" src="<?php echo esc_url( $full_image_attributes[0] . '?' . mt_rand( 1000, 9999 ) ); ?>" style="max-width: 100%;" />
 								<div id="yoimg-replace-restore-wrapper">
-									<div id="yoimg-replace-img-btn" style="display:none;" title="<?php _e( 'Replace image source for', YOIMG_DOMAIN ); ?> <?php echo esc_attr( $yoimg_image_size ); ?>" class="button button-primary button-large"><?php _e( 'Replace', YOIMG_DOMAIN ); ?></div>
+									<div id="yoimg-replace-img-btn" style="display:none;" title="<?php esc_attr_e( 'Replace image source for', YOIMG_DOMAIN ); ?> <?php echo esc_attr( $yoimg_image_size ); ?>" class="button button-primary button-large"><?php esc_html_e( 'Replace', YOIMG_DOMAIN ); ?></div>
 									<?php if ( $has_replacement ) {?>
-										<div id="yoimg-restore-img-btn" title="<?php _e( 'Restore original image source for', YOIMG_DOMAIN ); ?> <?php echo esc_attr( $yoimg_image_size ); ?>" class="button button-large"><?php _e( 'Restore', YOIMG_DOMAIN ); ?></div>
+										<div id="yoimg-restore-img-btn" title="<?php esc_attr_e( 'Restore original image source for', YOIMG_DOMAIN ); ?> <?php echo esc_attr( $yoimg_image_size ); ?>" class="button button-large"><?php esc_html_e( 'Restore', YOIMG_DOMAIN ); ?></div>
 									<?php } ?>
 								</div>
 							</div>
@@ -133,11 +133,11 @@ if ( $has_replacement ) {
 								
 								if ( $this_crop_exists ) {
 								?>
-									<h3><?php _e( 'Current', YOIMG_DOMAIN ); ?> <?php echo esc_html( $cropped_image_sizes['name'] ); ?> (<?php echo (int) $attachment_metadata['sizes'][$yoimg_image_size]['width']; ?>x<?php echo (int) $attachment_metadata['sizes'][$yoimg_image_size]['height']; ?>)</h3>
+									<h3><?php esc_html_e( 'Current', YOIMG_DOMAIN ); ?> <?php echo esc_html( $cropped_image_sizes['name'] ); ?> (<?php echo (int) $attachment_metadata['sizes'][$yoimg_image_size]['width']; ?>x<?php echo (int) $attachment_metadata['sizes'][$yoimg_image_size]['height']; ?>)</h3>
 								<?php
 								} else {
 								?>
-									<h3><?php _e( 'Current', YOIMG_DOMAIN ); ?> <?php echo esc_html( $cropped_image_sizes['name'] ); ?> (<?php echo (int) $curr_size_width; ?>x<?php echo (int) $curr_size_height; ?>)</h3>
+									<h3><?php esc_html_e( 'Current', YOIMG_DOMAIN ); ?> <?php echo esc_html( $cropped_image_sizes['name'] ); ?> (<?php echo (int) $curr_size_width; ?>x<?php echo (int) $curr_size_height; ?>)</h3>
 								<?php	
 								}
 								$image_attributes = wp_get_attachment_image_src( $yoimg_image_id, $yoimg_image_size );
@@ -157,24 +157,24 @@ if ( $has_replacement ) {
 									<div class="yoimg-not-existing-crop">
 										<img src="<?php echo esc_url( $expected_url ); ?>" style="max-width: 100%;" />
 										<div class="message error">
-												<p><?php _e( 'Crop not generated yet, use the crop button here below to generate it', YOIMG_DOMAIN ); ?></p>
+												<p><?php esc_html_e( 'Crop not generated yet, use the crop button here below to generate it', YOIMG_DOMAIN ); ?></p>
 										</div>
 									</div>
 								<?php } ?>
 								
 								<div class="message error yoimg-crop-smaller" style="display:<?php echo $is_crop_smaller ? 'block' : 'none'; ?>;">
 									<?php //TODO ?>
-									<p><?php _e( 'This crop is smaller than expected, you may replace the original image for this crop format using the replace button on the left and then cropping it', YOIMG_DOMAIN ); ?></p>
+									<p><?php esc_html_e( 'This crop is smaller than expected, you may replace the original image for this crop format using the replace button on the left and then cropping it', YOIMG_DOMAIN ); ?></p>
 								</div>
 								
 								<div class="message error yoimg-crop-retina-smaller" style="display:<?php echo $is_crop_retina_smaller ? 'block' : 'none'; ?>;">
-									<p><?php _e( 'This crop is too small to create the retina version of the image, you may replace the original image for this crop format using the replace button on the left and then crop it again.', YOIMG_DOMAIN ); ?></p>
+									<p><?php esc_html_e( 'This crop is too small to create the retina version of the image, you may replace the original image for this crop format using the replace button on the left and then crop it again.', YOIMG_DOMAIN ); ?></p>
 								</div>
 								
-								<h3 id="yoimg-cropper-preview-title"><?php _e( 'Crop preview', YOIMG_DOMAIN ); ?></h3>
+								<h3 id="yoimg-cropper-preview-title"><?php esc_html_e( 'Crop preview', YOIMG_DOMAIN ); ?></h3>
 								<div id="yoimg-cropper-preview"></div>
 								<div class="yoimg-cropper-quality-wrapper">
-									<label for="yoimg-cropper-quality"><?php _e( 'Crop quality', YOIMG_DOMAIN ); ?>:</label>
+									<label for="yoimg-cropper-quality"><?php esc_html_e( 'Crop quality', YOIMG_DOMAIN ); ?>:</label>
 									<select name="quality" id="yoimg-cropper-quality">
 									
 										<?php
@@ -191,7 +191,7 @@ if ( $has_replacement ) {
 								<div class="yoimg-crop-now-wrapper">
 									<a href="javascript:yoimgCropImage();"
 											class="button media-button button-primary button-large media-button-select">
-										<?php _e( 'Crop', YOIMG_DOMAIN ); ?> <?php echo esc_html( $cropped_image_sizes['name'] ); ?>
+										<?php esc_html_e( 'Crop', YOIMG_DOMAIN ); ?> <?php echo esc_html( $cropped_image_sizes['name'] ); ?>
 									</a>
 									<span class="spinner"></span>
 								</div>

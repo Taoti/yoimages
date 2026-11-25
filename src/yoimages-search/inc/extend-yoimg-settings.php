@@ -53,7 +53,7 @@ function yoimg_search_settings_search_is_active_callback() {
 	printf(
 	'<input type="checkbox" id="search_is_active" name="yoimg_search_settings[search_is_active]" value="TRUE" %s />
 		<p class="description">' . __( 'If checked free stock images search is active', YOIMG_DOMAIN ) . '</p>',
-				! empty( $search_options['search_is_active'] ) ? 'checked=\"checked\"' : ( YOIMG_DEFAULT_SEARCH_ENABLED && ! isset( $search_options['search_is_active'] ) ? 'checked="checked"' : '' )
+				! empty( $search_options['search_is_active'] ) ? 'checked="checked"' : ( YOIMG_DEFAULT_SEARCH_ENABLED && ! isset( $search_options['search_is_active'] ) ? 'checked="checked"' : '' )
 	);
 }
 

@@ -69,6 +69,7 @@ composer lint:wpcs   # full WordPress standard (legacy code, expect findings)
 
 - **Upgrade Cropper.** The crop screen still runs on Cropper v0.5.2, a 2014 jQuery plugin. The current release is [Cropper.js 2.x](https://github.com/fengyuanchen/cropperjs). Version 1.7 plus its jQuery wrapper is the smaller step. Version 2 is a rewrite, so the cropping JavaScript and markup in `src/yoimages-crop/inc/` will need reworking. Not a drop-in swap.
 - Refresh the stock photo search providers. Splashbase is long gone, and the Unsplash client is built on an API that has since changed.
+- **Create a unit testing suite.** There are no automated tests today. Start with PHPUnit for the crop, replace, restore, and stock photo import handlers (nonce and capability checks, input validation, failed-crop cleanup), then add Given, When, Then scenarios for the admin flows.
 - A simple built-in image editor (effects, editing, color optimization).
 - Image gallery templates.
 

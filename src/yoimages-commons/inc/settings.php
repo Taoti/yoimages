@@ -25,7 +25,7 @@ if ( ! class_exists( 'YoImagesSettingsPage' ) ) {
 			$settings = apply_filters( 'yoimg_settings', array() );
 			?>
 			<div class="wrap" id="yoimg-settings-wrapper">
-				<h2><?php _e( 'YoImages settings', YOIMG_DOMAIN ); ?></h2>
+				<h2><?php esc_html_e( 'YoImages settings', YOIMG_DOMAIN ); ?></h2>
 				<?php
 				if( isset( $_GET[ 'tab' ] ) ) {
 					$active_tab = sanitize_key( wp_unslash( $_GET[ 'tab' ] ) );
@@ -65,19 +65,19 @@ if ( ! class_exists( 'YoImagesSettingsPage' ) ) {
 				} elseif ( isset( $yoimg_modules[$active_tab] ) ) {
 				?>
 					<div class="message error">
-						<p><?php _e( 'You are trying to access a YoImages\' module that has no settings page', YOIMG_DOMAIN ); ?></p>
+						<p><?php esc_html_e( 'You are trying to access a YoImages\' module that has no settings page', YOIMG_DOMAIN ); ?></p>
 					</div>
 				<?php
 				} elseif ( isset ( $yoimg_plugins_url[$active_tab] ) ) {
 				?>
 					<div class="message update-nag">
-						<p><?php _e( 'This YoImages\' module is not active or installed, please activate it in the plugins administration page or install it from here:', YOIMG_DOMAIN ); ?> <a href="<?php echo esc_url( $yoimg_plugins_url[$active_tab] ); ?>"><?php echo esc_html( $yoimg_plugins_url[$active_tab] ); ?></a></p>
+						<p><?php esc_html_e( 'This YoImages\' module is not active or installed, please activate it in the plugins administration page or install it from here:', YOIMG_DOMAIN ); ?> <a href="<?php echo esc_url( $yoimg_plugins_url[$active_tab] ); ?>"><?php echo esc_html( $yoimg_plugins_url[$active_tab] ); ?></a></p>
 					</div>
 				<?php
 				} else {
 				?>
 					<div class="message error">
-						<p><?php _e( 'Unknown module', YOIMG_DOMAIN ); ?></p>
+						<p><?php esc_html_e( 'Unknown module', YOIMG_DOMAIN ); ?></p>
 					</div>
 				<?php
 				}

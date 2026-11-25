@@ -153,7 +153,11 @@ function yoimg_crop_this_image( $args ){
 			$img_editor_retina->set_quality( $req_quality );
 			$img_retina_path_parts         = pathinfo( $cropped_image_filename );
 			$cropped_image_retina_filename = $img_retina_path_parts['filename'] . '@2x.' . $img_retina_path_parts['extension'];
-			$img_editor_retina->save( $img_path_parts['dirname'] . '/' . $cropped_image_retina_filename );
+			$saved_retina = $img_editor_retina->save( $img_path_parts['dirname'] . '/' . $cropped_image_retina_filename );
+			if ( is_wp_error( $saved_retina ) ) {
+				yoimg_log( $saved_retina );
+				return false;
+			}
 		}
 	}
 	$attachment_metadata['sizes'][$req_size]['width'] = $crop_width;

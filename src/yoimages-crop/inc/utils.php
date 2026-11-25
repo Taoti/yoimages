@@ -14,13 +14,21 @@ function yoimg_get_cropped_image_filename( $filename, $width, $height, $extensio
 }
 
 function yoimg_get_edit_image_url( $id, $size ) {
-	return admin_url( 'admin-ajax.php' ) . '?action=yoimg_edit_thumbnails_page&post=' . $id . '&size=' . $size . '&_wpnonce=' . yoimg_ajax_nonce();
+	return add_query_arg(
+		array(
+			'action'   => 'yoimg_edit_thumbnails_page',
+			'post'     => absint( $id ),
+			'size'     => rawurlencode( (string) $size ),
+			'_wpnonce' => yoimg_ajax_nonce(),
+		),
+		admin_url( 'admin-ajax.php' )
+	);
 }
 
 function yoimg_get_edit_image_anchor( $id, $size = '', $styles = '', $classes = '' ) {
 	add_thickbox();
 	$edit_crops_url = yoimg_get_edit_image_url( $id, $size );
-	return '<a class="yoimg-thickbox yoimg ' . $classes . '" style="' . $styles . '" href="' . $edit_crops_url . '" title="' . __( 'Edit crop formats', YOIMG_DOMAIN ) . '">' . __( 'Edit crop formats', YOIMG_DOMAIN ) . '</a>';
+	return '<a class="yoimg-thickbox yoimg ' . esc_attr( $classes ) . '" style="' . esc_attr( $styles ) . '" href="' . esc_url( $edit_crops_url ) . '" title="' . esc_attr__( 'Edit crop formats', YOIMG_DOMAIN ) . '">' . esc_html__( 'Edit crop formats', YOIMG_DOMAIN ) . '</a>';
 }
 
 function yoimg_get_edit_image_anchor_ajax() {
